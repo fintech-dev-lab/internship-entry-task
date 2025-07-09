@@ -55,7 +55,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     env:
-      POSTGRES_CONNECTION: "Host=localhost;Database=test;Username=postgres;Password=postgres"
+      ConnectionStrings__Postgres: "Host=localhost;Database=test;Username=postgres;Password=postgres;Port=5432"
     steps:
       - uses: actions/checkout@v4
       - name: Restore test dependencies
