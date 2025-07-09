@@ -125,7 +125,12 @@ internal sealed class PostgresGameRepository(
 			
 			var parameters = new
 			{
-				game.Id, game.State, game.Winner, game.CurrentPlayer, game.Field.Cells, game.LengthForWin,
+				game.Id, 
+				State = (short)game.State, 
+				Winner = (short?)game.Winner, 
+				CurrentPlayer = (short)game.CurrentPlayer, 
+				Cells = game.Field.Cells.ToShortArray(), 
+				LengthForWin = (short)game.LengthForWin,
 				Updated = DateTime.UtcNow,
 			};
 			

@@ -7,4 +7,10 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Program Files\dotnet\packs\Microsoft.AspNetCore.App.Ref\9.0.3\ref\net9.0\Microsoft.Extensions.Options.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Program Files\dotnet\packs\Microsoft.AspNetCore.App.Ref\9.0.3\ref\net9.0\Microsoft.AspNetCore.Http.dll" /&gt;&#xD;
-&lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>
+&lt;/AssemblyExplorer&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4620fe86_002D4af8_002D49cf_002Daa68_002Da3058da827de/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GameFieldTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::6A997A4E-8176-4B4A-AA8A-45EA3EF18275::net9.0::Segrom.СrossesProject.Domain.Test.GameFieldTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6A997A4E-8176-4B4A-AA8A-45EA3EF18275::net9.0::Segrom.СrossesProject.Domain.Test.GameTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

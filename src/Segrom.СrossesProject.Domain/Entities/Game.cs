@@ -19,6 +19,9 @@ public sealed class Game(Guid id, uint fieldSize, uint lengthForWin)
 
 	public void Move(Position position)
 	{
+		if (State == GameState.Finished)
+			throw new DomainException("Game is finished");
+		
 		if (Field.IsPositionOutOfBounds(position)) 
 			throw new DomainException("Position is out of bounds");
 		
