@@ -25,6 +25,7 @@ namespace TicTacToe.Controllers
         [HttpPost]
         public async Task<ActionResult<GameDto>> Create(CreateGameDto model)
         {
+            //todo: проверить что gameOptions не изменится для всех
             var gameOptions = _gameOptions.Value;
             if (model.BoarSize != null)
                 gameOptions.BoardSize = model.BoarSize.Value;
@@ -32,6 +33,27 @@ namespace TicTacToe.Controllers
                 gameOptions.BoardSize = boardSize;
 
             var gameDto = await _gameService.Create(gameOptions);
+            return Ok(gameDto);
+        }
+
+        [HttpGet("{gameId}")]
+        public async Task<ActionResult<GameDto>> Get(int gameId)
+        {
+            var gameDto = await _gameService.Get(gameId);
+            return Ok(gameDto);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<GameDto>> Get()
+        {
+            var games = await _gameService.Get();
+            return Ok(games);
+        }
+
+        [HttpPost("{gameId}")]
+        public async Task<ActionResult> Move(int gameId, CreateMoveDto dto)
+        {
+            var gameDto = await _gameService.Move(gameId, dto);
             return Ok(gameDto);
         }
     }

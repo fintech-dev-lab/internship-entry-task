@@ -51,8 +51,7 @@ namespace TicTacToe.Extentions
 
         public static WebApplicationBuilder AddAppServices(this WebApplicationBuilder builder)
         {
-            builder.Services.AddHttpContextAccessor();
-            builder.Services.AddSingleton<IGameService, GameService>();
+            builder.Services.AddScoped<IGameService, GameService>();
             return builder;
         }
 

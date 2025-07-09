@@ -3,5 +3,6 @@
     public class CreateGameDto
     {
         public int? BoarSize { get; set; }
+        public int? WinCondition { get; set; }
     }
 }
