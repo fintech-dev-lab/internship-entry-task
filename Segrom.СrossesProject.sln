@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{DC0CC6
 		.env = .env
 		Directory.Build.props = Directory.Build.props
 		README.md = README.md
+		.github\workflows\test-wokflow.yml = .github\workflows\test-wokflow.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{89465668-ABFC-4BB7-8B00-CC1FC51E0A5A}"

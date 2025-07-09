@@ -1,0 +1,67 @@
+﻿name: Tests pipeline
+run-name: ${{ github.actor }} run testing
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+jobs:
+  # Build
+  service-build:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/dotnet/sdk:9.0
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore dependencies
+        run: dotnet restore src/Segrom.JobObserver.OzonService.Host
+      - name: Build project
+        run: dotnet build src/Segrom.JobObserver.OzonService.Host --no-restore
+  
+  # Unit tests
+  domain-unit-test:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/dotnet/sdk:9.0
+    needs: [service-build]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore test dependencies
+        run: dotnet restore test/Segrom.JobObserver.OzonService.Domain.Test
+      - name: Build tests
+        run: dotnet build test/Segrom.JobObserver.OzonService.Domain.Test --no-restore
+      - name: Run unit tests
+        working-directory: test/Segrom.JobObserver.OzonService.Domain.Test
+        run: dotnet test --no-restore
+
+  # Integration tests
+  integration-test:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/dotnet/sdk:9.0
+    needs: [service-build]
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      POSTGRES_CONNECTION: "Host=localhost;Database=test;Username=postgres;Password=postgres"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore test dependencies
+        run: dotnet restore test/Segrom.СrossesProject.IntegrationTest
+      - name: Build tests
+        run: dotnet build test/Segrom.СrossesProject.IntegrationTest --no-restore
+      - name: Run integration tests
+        working-directory: test/Segrom.СrossesProject.IntegrationTest
+        run: dotnet test --no-restore
