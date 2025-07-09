@@ -1,6 +1,7 @@
 ﻿using Segrom.СrossesProject.Domain.Entities;
+using Segrom.СrossesProject.Domain.Enums;
 using Segrom.СrossesProject.Domain.ValueObjects;
-using Segrom.СrossesProject.Host.Dtos;
+using Segrom.СrossesProject.Host.DTO;
 
 namespace Segrom.СrossesProject.Host.Extensions;
 
@@ -9,13 +10,20 @@ internal static class MappingExtensions
 	public static GameDto ToDto(this Game dto)
 	{
 		var size = dto.Field.Size;
-		var field = new byte[size, size];
+		var field = new char[size][];
 		
 		for (var y = 0; y < size; y++)
 		{
+			field[y] = new char[size];
 			for (var x = 0; x < size; x++)
 			{
-				field[x,y] =  (byte)dto.Field.Cells[x,y];
+				field[y][x] =  dto.Field.Cells[x,y] switch
+				{
+					CellState.Empty => '_',
+					CellState.X => 'X',
+					CellState.O => 'O',
+					_ => throw new ArgumentOutOfRangeException()
+				};
 			}
 		}
 

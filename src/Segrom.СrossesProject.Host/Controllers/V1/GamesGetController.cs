@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Segrom.СrossesProject.Application.Abstractions;
 using Segrom.СrossesProject.Application.Exceptions;
-using Segrom.СrossesProject.Host.Dtos;
+using Segrom.СrossesProject.Host.DTO;
 using Segrom.СrossesProject.Host.Extensions;
 
 namespace Segrom.СrossesProject.Host.Controllers.V1;

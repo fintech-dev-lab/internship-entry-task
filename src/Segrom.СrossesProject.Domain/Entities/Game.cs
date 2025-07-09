@@ -5,15 +5,17 @@ using Segrom.СrossesProject.Domain.ValueObjects;
 
 namespace Segrom.СrossesProject.Domain.Entities;
 
-public sealed class Game(uint fieldSize, uint lengthForWin)
+public sealed class Game(Guid id, uint fieldSize, uint lengthForWin)
 {
-	public Guid Id { get; set; }
+	public Guid Id { get; set; } = id;
 
 	public GameField Field { get; set; } = new(fieldSize);
 
 	public GameState State { get; set; } = GameState.Continues;
 	public WinnerType? Winner { get; set; }
 	public PlayerType CurrentPlayer { get; set; } = PlayerType.XPlayer;
+	
+	public readonly uint LengthForWin = lengthForWin; 
 
 	public void Move(Position position)
 	{
@@ -43,7 +45,7 @@ public sealed class Game(uint fieldSize, uint lengthForWin)
 
 	private void UpdateGameState()
 	{
-		var winnerCell = Field.TryGetCellWithLength(lengthForWin);
+		var winnerCell = Field.TryGetCellWithLength(LengthForWin);
 		if (winnerCell is null)
 		{
 			if (!Field.IsFieldFilledIn()) return;

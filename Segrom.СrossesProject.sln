@@ -16,6 +16,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{DC0CC6
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{89465668-ABFC-4BB7-8B00-CC1FC51E0A5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Segrom.СrossesProject.GameProvider", "src\Segrom.СrossesProject.GameProvider\Segrom.СrossesProject.GameProvider.csproj", "{1310C312-8CBB-49C3-B153-50816EB57B70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Segrom.СrossesProject.PostgresRepository", "src\Segrom.СrossesProject.PostgresRepository\Segrom.СrossesProject.PostgresRepository.csproj", "{AF236185-26FE-4076-BCF3-D723B4B26BB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,10 +40,20 @@ Global
 		{47A1CB22-8030-4717-AA99-E4ECD3DE8880}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47A1CB22-8030-4717-AA99-E4ECD3DE8880}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47A1CB22-8030-4717-AA99-E4ECD3DE8880}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1310C312-8CBB-49C3-B153-50816EB57B70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1310C312-8CBB-49C3-B153-50816EB57B70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1310C312-8CBB-49C3-B153-50816EB57B70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1310C312-8CBB-49C3-B153-50816EB57B70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF236185-26FE-4076-BCF3-D723B4B26BB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF236185-26FE-4076-BCF3-D723B4B26BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF236185-26FE-4076-BCF3-D723B4B26BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF236185-26FE-4076-BCF3-D723B4B26BB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{47A1CB22-8030-4717-AA99-E4ECD3DE8880} = {6910BD91-C02A-4BBD-9BE2-CD4323DB11D8}
 		{048A03B6-52AA-4271-93E1-84EC2EB16F35} = {6910BD91-C02A-4BBD-9BE2-CD4323DB11D8}
 		{5EDEBE67-765A-41BB-9177-D2F639503DA5} = {6910BD91-C02A-4BBD-9BE2-CD4323DB11D8}
+		{1310C312-8CBB-49C3-B153-50816EB57B70} = {6910BD91-C02A-4BBD-9BE2-CD4323DB11D8}
+		{AF236185-26FE-4076-BCF3-D723B4B26BB0} = {6910BD91-C02A-4BBD-9BE2-CD4323DB11D8}
 	EndGlobalSection
 EndGlobal

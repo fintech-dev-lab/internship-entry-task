@@ -16,7 +16,10 @@ internal sealed class GameService(
 {
 	public async Task<Game> NewGame(CancellationToken cancellationToken)
 	{
-		return await gameProvider.Create(options.CurrentValue.FieldSize, cancellationToken);
+		return await gameProvider.Create(
+			fieldSize: options.CurrentValue.FieldSize, 
+			lengthForWin: options.CurrentValue.LengthForWin, 
+			cancellationToken);
 	}
 
 	public async Task<Game> GetGame(Guid gameId, CancellationToken cancellationToken)
@@ -44,7 +47,7 @@ internal sealed class GameService(
 			throw new AppException("Failed to move game", e);
 		}
 
-		await gameProvider.Update(game);
+		await gameProvider.Update(game, cancellationToken);
 		return game;
 	}
 }

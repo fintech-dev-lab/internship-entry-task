@@ -1,0 +1,45 @@
+name: crosses-project
+
+volumes:
+  crosses-project-database:
+    
+services:
+  api:
+    image: crosses-project/api
+    container_name: api
+    build:
+      dockerfile: ./src/Segrom.СrossesProject.Host/Dockerfile
+    depends_on:
+      - games-database
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost/health" ]
+      interval: 5s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    ports:
+      - "${API_PORT}:8080"
+    environment:
+      ConnectionStrings__Postgres: User ID=${DB_USER};Password=${DB_PASS};Host=games-database;Port=${DB_PORT};Database=${DB_NAME};
+  
+  games-database:
+    image: postgres:latest
+    container_name: games-database
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U ${DB_USER} -d ${DB_NAME}'"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    restart: always
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    command:
+      -p ${DB_PORT}
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    volumes:
+      - crosses-project-database:/var/lib/postgresql/data
+  
+    

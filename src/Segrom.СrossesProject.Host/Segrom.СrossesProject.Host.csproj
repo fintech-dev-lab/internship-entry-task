@@ -15,13 +15,15 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+      <ProjectReference Include="..\Segrom.СrossesProject.Application\Segrom.СrossesProject.Application.csproj" />
+      <ProjectReference Include="..\Segrom.СrossesProject.GameProvider\Segrom.СrossesProject.GameProvider.csproj" />
+      <ProjectReference Include="..\Segrom.СrossesProject.PostgresRepository\Segrom.СrossesProject.PostgresRepository.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Segrom.СrossesProject.Application\Segrom.СrossesProject.Application.csproj" />
+      <Content Include="..\..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 </Project>

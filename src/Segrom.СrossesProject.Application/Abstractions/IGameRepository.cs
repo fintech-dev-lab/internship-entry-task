@@ -2,9 +2,9 @@
 
 namespace Segrom.СrossesProject.Application.Abstractions;
 
-public interface IGameProvider
+public interface IGameRepository
 {
-	Task<Game> Create(uint fieldSize, uint lengthForWin, CancellationToken cancellationToken);
+	Task Create(Game game, CancellationToken cancellationToken);
 	Task<Game?> Get(Guid gameId, CancellationToken cancellationToken);
 	Task Update(Game game, CancellationToken cancellationToken);
 }
