@@ -9,7 +9,7 @@ using Segrom.СrossesProject.Host.Extensions;
 namespace Segrom.СrossesProject.Host.Controllers.V1;
 
 [ApiController]
-[Route("v1/games/{id:guid}")]
+[Route("api/v1/games/{id:guid}")]
 public class GamesGetController(
 	ILogger<GamesNewController> logger, 
 	IGameService gameService

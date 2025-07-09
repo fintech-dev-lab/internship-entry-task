@@ -29,3 +29,6 @@ app.UseMiddleware<ETagMiddleware>();
 app.ApplyPostgresMigrations();
 
 app.Run();
+
+// For integration tests
+public partial class Program { }

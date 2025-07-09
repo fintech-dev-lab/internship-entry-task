@@ -12,5 +12,6 @@
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::6A997A4E-8176-4B4A-AA8A-45EA3EF18275::net9.0::Segrom.СrossesProject.Domain.Test.GameFieldTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::6A997A4E-8176-4B4A-AA8A-45EA3EF18275::net9.0::Segrom.СrossesProject.Domain.Test.GameTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::85D7CBA6-1F09-4C8A-911C-C58DD49A2007::net9.0::Segrom.СrossesProject.IntegrationTest.Test&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

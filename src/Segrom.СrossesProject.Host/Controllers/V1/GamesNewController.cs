@@ -8,7 +8,7 @@ using Segrom.СrossesProject.Host.Extensions;
 namespace Segrom.СrossesProject.Host.Controllers.V1;
 
 [ApiController]
-[Route("v1/games/new")]
+[Route("api/v1/games/new")]
 public class GamesNewController(
 	ILogger<GamesNewController> logger, 
 	IGameService gameService
