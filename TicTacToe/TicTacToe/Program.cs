@@ -1,4 +1,3 @@
-
 using TicTacToe.Extentions;
 
 namespace TicTacToe
@@ -10,10 +9,13 @@ namespace TicTacToe
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
-            builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+            builder.AddData();
+            builder.AddControllers();
+            builder.AddAutoMapper();
+            builder.AddAppServices();
+            builder.AddExceptionHandler();
             builder.AddSwagger();
+            builder.AddFluentValidation();
 
             var app = builder.Build();
 
@@ -23,6 +25,8 @@ namespace TicTacToe
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseExceptionHandler();
 
             app.UseHttpsRedirection();
 
