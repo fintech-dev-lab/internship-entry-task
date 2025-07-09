@@ -15,9 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Restore dependencies
-        run: dotnet restore src/Segrom.JobObserver.OzonService.Host
+        run: dotnet restore src/Segrom.СrossesProject.Host
       - name: Build project
-        run: dotnet build src/Segrom.JobObserver.OzonService.Host --no-restore
+        run: dotnet build src/Segrom.СrossesProject.Host --no-restore
   
   # Unit tests
   domain-unit-test:
@@ -27,11 +27,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Restore test dependencies
-        run: dotnet restore test/Segrom.JobObserver.OzonService.Domain.Test
+        run: dotnet restore test/Segrom.СrossesProject.Domain.Test
       - name: Build tests
-        run: dotnet build test/Segrom.JobObserver.OzonService.Domain.Test --no-restore
+        run: dotnet build test/Segrom.СrossesProject.Domain.Test --no-restore
       - name: Run unit tests
-        working-directory: test/Segrom.JobObserver.OzonService.Domain.Test
+        working-directory: test/Segrom.СrossesProject.Domain.Test
         run: dotnet test --no-restore
 
   # Integration tests
