@@ -32,7 +32,7 @@ namespace TicTacToe.Services
                 BoardSize = model.BoardSize!.Value,
                 WinLenght = model.WinLenght!.Value,
                 CurrentSymbol = TicTacToeSymbol.X,
-                Result = GameResult.InProcess
+                Result = GameResult.InProgress
             };
 
             await _dbContext.Games.AddAsync(game);
@@ -62,7 +62,7 @@ namespace TicTacToe.Services
             if (game == null)
                 throw new ServiceException("Game Not Found", $"Game with id {gameId} not found", StatusCodes.Status404NotFound);
 
-            if (game.Result != GameResult.InProcess)
+            if (game.Result != GameResult.InProgress)
                 throw new ServiceException("Game Finished", $"Game with id {gameId} is finished", StatusCodes.Status409Conflict);
             
             ValidateMove(model, game);
@@ -83,7 +83,7 @@ namespace TicTacToe.Services
             var gameResult = TicTacToeUtils.CheckGameStatus(game.GetBoard(), game.WinLenght);
 
             game.Result = gameResult;
-            game.CurrentSymbol = gameResult != GameResult.InProcess ? null : game.CurrentSymbol == TicTacToeSymbol.X ? TicTacToeSymbol.O : TicTacToeSymbol.X;
+            game.CurrentSymbol = gameResult != GameResult.InProgress ? null : game.CurrentSymbol == TicTacToeSymbol.X ? TicTacToeSymbol.O : TicTacToeSymbol.X;
      
             await _dbContext.SaveChangesAsync();
 

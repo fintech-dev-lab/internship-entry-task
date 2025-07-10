@@ -55,7 +55,7 @@ namespace TicTacToe.Controllers
             return Ok(games);
         }
 
-        [HttpPost("{gameId}")]
+        [HttpPost("{gameId}/move")]
         public async Task<ActionResult> Move(int gameId, CreateMoveDto dto)
         {
             var gameDto = await _gameService.Move(gameId, dto);

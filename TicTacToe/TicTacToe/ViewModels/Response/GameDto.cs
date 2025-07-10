@@ -4,6 +4,7 @@ namespace TicTacToe.ViewModels.Response
 {
     public class GameDto
     {
+        public int Id { get; set; }
         public int BoardSize { get; set; }
         public int WinLenght { get; set; }
         public TicTacToeSymbol? CurrentSymbol { get; set; }

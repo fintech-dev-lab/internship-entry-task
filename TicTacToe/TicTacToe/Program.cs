@@ -16,6 +16,7 @@ namespace TicTacToe
             builder.AddExceptionHandler();
             builder.AddSwagger();
             builder.AddFluentValidation();
+            builder.AddOptions();
 
             var app = builder.Build();
 
