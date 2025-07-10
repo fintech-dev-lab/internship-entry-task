@@ -20,8 +20,11 @@ namespace TicTacToe
 
             var app = builder.Build();
 
+            if (!app.Environment.IsDevelopment())
+                app.MigrateDB();
+
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            //if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();

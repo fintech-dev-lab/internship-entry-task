@@ -16,8 +16,11 @@ namespace TicTacToe.Extentions
     {
         public static WebApplicationBuilder AddData(this WebApplicationBuilder builder)
         {
-            builder.Services.AddDbContext<ApplicationContext>(opt =>
-               opt.UseInMemoryDatabase("TestDB"));
+            if (builder.Environment.IsDevelopment())
+                builder.Services.AddDbContext<ApplicationContext>(opt => opt.UseInMemoryDatabase("TestDB"));
+            else
+                builder.Services.AddDbContext<ApplicationContext>(opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+            
             return builder;
         }
 

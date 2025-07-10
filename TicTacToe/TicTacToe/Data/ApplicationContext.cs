@@ -15,8 +15,12 @@ namespace TicTacToe.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //TODO: Сделать индекс по трем колонкам
-            //modelBuilder.Entity<Move>().HasIndex(m => m.GameId).IsUnique();
+            modelBuilder.Entity<Game>().
+                HasMany(g => g.Moves)
+                .WithOne(m => m.Game).
+                OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Move>().HasIndex(m => new { m.GameId, m.Column, m.Row }).IsUnique();
         }
     }
 }
