@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe.Api", "TicTacToe.Api\TicTacToe.Api.csproj", "{D778C78A-DDCB-4A92-9FAD-EBEACDFFC1BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe.Core", "TicTacToe.Core\TicTacToe.Core.csproj", "{8D95F0CA-2107-4330-8873-02FFE33A7D8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe.Services", "TicTacToe.Services\TicTacToe.Services.csproj", "{8A1C045B-3522-4223-B7FD-8079102F067E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe.Contracts", "TicTacToe.Contracts\TicTacToe.Contracts.csproj", "{C61E73BF-C172-43A2-89E4-EA77C990CD9B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D778C78A-DDCB-4A92-9FAD-EBEACDFFC1BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D778C78A-DDCB-4A92-9FAD-EBEACDFFC1BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D778C78A-DDCB-4A92-9FAD-EBEACDFFC1BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D778C78A-DDCB-4A92-9FAD-EBEACDFFC1BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D95F0CA-2107-4330-8873-02FFE33A7D8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D95F0CA-2107-4330-8873-02FFE33A7D8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D95F0CA-2107-4330-8873-02FFE33A7D8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D95F0CA-2107-4330-8873-02FFE33A7D8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A1C045B-3522-4223-B7FD-8079102F067E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A1C045B-3522-4223-B7FD-8079102F067E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A1C045B-3522-4223-B7FD-8079102F067E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A1C045B-3522-4223-B7FD-8079102F067E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C61E73BF-C172-43A2-89E4-EA77C990CD9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C61E73BF-C172-43A2-89E4-EA77C990CD9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C61E73BF-C172-43A2-89E4-EA77C990CD9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C61E73BF-C172-43A2-89E4-EA77C990CD9B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
