@@ -2,7 +2,7 @@
 {
     public class CreateGameDto
     {
-        public int? BoarSize { get; set; }
-        public int? WinCondition { get; set; }
+        public int? BoardSize { get; set; }
+        public int? WinLenght { get; set; }
     }
 }

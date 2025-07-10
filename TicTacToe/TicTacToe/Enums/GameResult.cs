@@ -2,8 +2,9 @@
 {
     public enum GameResult
     {
+        InProcess,
         XWin,
         OWin,
-        Draw
+        Draw,
     }
 }

@@ -25,14 +25,19 @@ namespace TicTacToe.Controllers
         [HttpPost]
         public async Task<ActionResult<GameDto>> Create(CreateGameDto model)
         {
-            //todo: проверить что gameOptions не изменится для всех
-            var gameOptions = _gameOptions.Value;
-            if (model.BoarSize != null)
-                gameOptions.BoardSize = model.BoarSize.Value;
-            else if (int.TryParse(Environment.GetEnvironmentVariable("DefaultBoardSize"), out var boardSize))
-                gameOptions.BoardSize = boardSize;
+            if (model.BoardSize == null)
+                if (int.TryParse(Environment.GetEnvironmentVariable("BoardSize"), out var boardSize))
+                    model.BoardSize = boardSize;
+                else
+                    model.BoardSize = _gameOptions.Value.BoardSize;
 
-            var gameDto = await _gameService.Create(gameOptions);
+            if (model.WinLenght == null)
+                if (int.TryParse(Environment.GetEnvironmentVariable("WinLenght"), out var winLenght))
+                    model.WinLenght = winLenght;
+                else
+                    model.WinLenght = _gameOptions.Value.WinLenght;
+
+            var gameDto = await _gameService.Create(model);
             return Ok(gameDto);
         }
 

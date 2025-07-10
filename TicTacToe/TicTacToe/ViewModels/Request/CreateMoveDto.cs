@@ -6,6 +6,6 @@ namespace TicTacToe.ViewModels.Request
     {
         public int Row { get; set; }
         public int Column { get; set; }
-        public PlayerType? Player { get; set; }
+        public TicTacToeSymbol? Symbol { get; set; }
     }
 }

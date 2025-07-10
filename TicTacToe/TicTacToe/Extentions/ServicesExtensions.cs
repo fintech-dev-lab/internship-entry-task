@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using TicTacToe.Data;
-using Microsoft.AspNetCore.Identity;
 using TicTacToe.Services;
 using TicTacToe.Abstractions;
 using TicTacToe.Models;

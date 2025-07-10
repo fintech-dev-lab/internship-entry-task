@@ -1,9 +1,8 @@
 ﻿namespace TicTacToe.Enums
 {
-    public enum PlayerType
+    public enum TicTacToeSymbol
     {
         X,
         O
     }
-
 }
