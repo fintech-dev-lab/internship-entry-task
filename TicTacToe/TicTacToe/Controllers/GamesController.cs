@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using TicTacToe.Abstractions;
+using TicTacToe.Exceptions;
 using TicTacToe.Models;
 using TicTacToe.ViewModels.Request;
 using TicTacToe.ViewModels.Response;
@@ -38,6 +39,8 @@ namespace TicTacToe.Controllers
                     model.WinLenght = _gameOptions.Value.WinLenght;
 
             var gameDto = await _gameService.Create(model);
+
+            HttpContext.Response.Headers.ETag = gameDto.ETag.ToString();
             return Ok(gameDto);
         }
 
@@ -45,6 +48,7 @@ namespace TicTacToe.Controllers
         public async Task<ActionResult<GameDto>> Get(int gameId)
         {
             var gameDto = await _gameService.Get(gameId);
+            HttpContext.Response.Headers.ETag = gameDto.ETag.ToString();
             return Ok(gameDto);
         }
 
@@ -58,7 +62,16 @@ namespace TicTacToe.Controllers
         [HttpPost("{gameId}/move")]
         public async Task<ActionResult> Move(int gameId, CreateMoveDto dto)
         {
+            var eTag = HttpContext.Request.Headers.IfMatch.ToString();
+            if(!string.IsNullOrEmpty(eTag))
+            {
+                var gameETag = await _gameService.GetGameETag(gameId);
+                if (gameETag.ToString() != eTag)
+                    throw new ServiceException("Precondition Failed", $"Game with id {gameId} was modified", StatusCodes.Status412PreconditionFailed);
+            }
+
             var gameDto = await _gameService.Move(gameId, dto);
+            HttpContext.Response.Headers.ETag = gameDto.ETag.ToString();
             return Ok(gameDto);
         }
     }

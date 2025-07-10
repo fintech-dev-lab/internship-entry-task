@@ -32,7 +32,8 @@ namespace TicTacToe.Services
                 BoardSize = model.BoardSize!.Value,
                 WinLenght = model.WinLenght!.Value,
                 CurrentSymbol = TicTacToeSymbol.X,
-                Result = GameResult.InProgress
+                Result = GameResult.InProgress,
+                ETag = Guid.NewGuid()
             };
 
             await _dbContext.Games.AddAsync(game);
@@ -55,6 +56,7 @@ namespace TicTacToe.Services
             var games = await _dbContext.Games.AsNoTracking().Include(g => g.Moves).ToArrayAsync();
             return _mapper.Map<GameDto[]>(games);
         }
+
 
         public async Task<GameDto> Move(int gameId, CreateMoveDto model)
         {
@@ -84,12 +86,17 @@ namespace TicTacToe.Services
 
             game.Result = gameResult;
             game.CurrentSymbol = gameResult != GameResult.InProgress ? null : game.CurrentSymbol == TicTacToeSymbol.X ? TicTacToeSymbol.O : TicTacToeSymbol.X;
-     
+            game.ETag = Guid.NewGuid();
+
             await _dbContext.SaveChangesAsync();
 
             return _mapper.Map<GameDto>(game);
         }
 
+        public async Task<Guid> GetGameETag(int gameId)
+        {
+            return await _dbContext.Games.Where(g => g.Id == gameId).Select(g => g.ETag).FirstOrDefaultAsync();
+        }
 
         private void ValidateMove(CreateMoveDto model, Game game)
         {

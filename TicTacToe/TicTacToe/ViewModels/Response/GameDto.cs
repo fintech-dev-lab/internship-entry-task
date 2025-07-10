@@ -14,6 +14,8 @@ namespace TicTacToe.ViewModels.Response
 
         public MoveDto[]? Moves { get; set; }
 
+        public Guid ETag { get; set; }
+
         public DateTime CreatedAt { get; set; }
     }
 }

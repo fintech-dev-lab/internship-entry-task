@@ -10,5 +10,6 @@ namespace TicTacToe.Abstractions
         public Task<GameDto> Get(int id);
         public Task<GameDto[]> Get();
         public Task<GameDto> Move(int gameId, CreateMoveDto model);
+        public Task<Guid> GetGameETag(int gameId);
     }
 }

@@ -11,6 +11,8 @@ namespace TicTacToe.Data.Entites
         public GameResult Result { get; set; }
         public int MovesCount { get; set; }
 
+        public Guid ETag { get; set; }
+
         public List<Move> Moves { get; set; } = [];
     }
 }
