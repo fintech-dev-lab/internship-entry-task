@@ -56,7 +56,7 @@ namespace TicTacToe.Services
             return _mapper.Map<GameDto[]>(games);
         }
 
-        public async Task<GameDto> Move(int gameId, CreateMoveDto dto)
+        public async Task<GameDto> Move(int gameId, CreateMoveDto model)
         {
             var game = await _dbContext.Games.Include(g => g.Moves).FirstOrDefaultAsync(g => g.Id == gameId);
             if (game == null)
@@ -65,17 +65,18 @@ namespace TicTacToe.Services
             if (game.Result != GameResult.InProcess)
                 throw new ServiceException("Game Finished", $"Game with id {gameId} is finished", StatusCodes.Status409Conflict);
             
-            ValidateMove(dto, game);
+            ValidateMove(model, game);
 
             var random = new Random();
             if (game.MovesCount + 1 % 3 == 0 && random.Next(100) < 10)
-                dto.Symbol = dto.Symbol == TicTacToeSymbol.X ? TicTacToeSymbol.O : TicTacToeSymbol.X;
+                model.Symbol = model.Symbol == TicTacToeSymbol.X ? TicTacToeSymbol.O : TicTacToeSymbol.X;
 
-            var move = new Move() 
+            var move = new Move()
             {
-                Column = dto.Column, 
-                Row = dto.Row, 
-                GameId = game.Id 
+                Column = model.Column!.Value,
+                Row = model.Row!.Value,
+                Symbol = model.Symbol!.Value,
+                GameId = game.Id
             };
             game.Moves.Add(move);
             game.MovesCount++;
@@ -90,15 +91,15 @@ namespace TicTacToe.Services
         }
 
 
-        private void ValidateMove(CreateMoveDto dto, Game game)
+        private void ValidateMove(CreateMoveDto model, Game game)
         {
-            if (game.CurrentSymbol != dto.Symbol!.Value)
+            if (game.CurrentSymbol != model.Symbol!.Value)
                 throw new ServiceException("Invalid Symbol", "It's the other player's turn now", StatusCodes.Status409Conflict);
 
-            if (game.BoardSize <= dto.Column || game.BoardSize <= dto.Row)
+            if (game.BoardSize <= model.Column || game.BoardSize <= model.Row)
                 throw new ServiceException("Invalid move", "Invalid column or row", StatusCodes.Status400BadRequest);
 
-            if (game.Moves.Any(m => m.Column == dto.Column && m.Row == dto.Row))
+            if (game.Moves.Any(m => m.Column == model.Column && m.Row == model.Row))
                 throw new ServiceException("Invalid move", "The cell is already taken", StatusCodes.Status400BadRequest);
         }
     }
