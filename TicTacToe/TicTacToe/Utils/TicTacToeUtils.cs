@@ -6,17 +6,17 @@ namespace TicTacToe.Utils
     public class TicTacToeUtils
     {
         public static GameResult CheckGameStatus(char[,] board, int winLength)
-        {
+        {          
             int size = board.GetLength(0);
             char winner = CheckWinner(board, size, winLength);
 
             if (winner != '\0')
-                return winner.ToString().ToEnum<TicTacToeSymbol>() == TicTacToeSymbol.X ? GameResult.XWin : GameResult.OWin; 
+                return winner.ToString().ToEnum<TicTacToeSymbol>() == TicTacToeSymbol.X ? GameResult.XWin : GameResult.OWin;
 
             // Проверка на ничью
             for (int i = 0; i < size; i++)
                 for (int j = 0; j < size; j++)
-                    if (board[i, j] == '\0')
+                    if (board[i, j] == ' ')
                         return GameResult.InProgress;
 
             return GameResult.Draw;
@@ -37,7 +37,7 @@ namespace TicTacToe.Utils
                 for (int j = 0; j < size; j++)
                 {
                     char current = board[i, j];
-                    if (current == '\0')
+                    if (current == ' ')
                         continue;
 
                     foreach (var dir in directions)

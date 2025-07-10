@@ -101,7 +101,7 @@ namespace TicTacToe.Services
         private void ValidateMove(CreateMoveDto model, Game game)
         {
             if (game.CurrentSymbol != model.Symbol!.Value)
-                throw new ServiceException("Invalid Symbol", "It's the other player's turn now", StatusCodes.Status409Conflict);
+                throw new ServiceException("Invalid Symbol", "It's the other player's turn now", StatusCodes.Status400BadRequest);
 
             if (game.BoardSize <= model.Column || game.BoardSize <= model.Row)
                 throw new ServiceException("Invalid move", "Invalid column or row", StatusCodes.Status400BadRequest);
