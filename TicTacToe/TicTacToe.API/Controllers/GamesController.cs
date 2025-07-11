@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using TicTacToe.API.Attributes;
 using TicTacToe.Application.Features.Games.Commands;
 using TicTacToe.Application.Features.Games.Queries;
 using TicTacToe.Application.Interfaces;
@@ -31,6 +32,7 @@ namespace TicTacToe.API.Controllers
         public record MakeMoveRequest(string Player, int Row, int Column);
 
         [HttpPost("{id:guid}/moves")]
+        [IdempotencyRequired]
         public async Task<IActionResult> MakeMove(Guid id, [FromBody] MakeMoveRequest request)
         {
             if (!Request.Headers.TryGetValue("Idempotency-Key", out var idempotencyKey))

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using TicTacToe.Api.SwaggerFilters;
 using TicTacToe.Application.Configuration;
 using TicTacToe.Application.Features.Games.Commands;
 using TicTacToe.Application.Interfaces;
@@ -27,7 +28,10 @@ builder.Services.Configure<GameSettings>(builder.Configuration.GetSection("GameS
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.OperationFilter<IdempotencyKeyHeaderFilter>();
+});
 
 var app = builder.Build();
 
