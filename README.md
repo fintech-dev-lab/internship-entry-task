@@ -6,7 +6,7 @@ docker-compose up
 ```
 #### Swagger API
 Документация по API доступна по адрессу `http://localhost:8080/swagger/index.html`  
-Или по адресу `http://localhost:5093` в режиме разработки
+Или по адресу `http://localhost:5093/swagger/index.html` в режиме разработки
 
 #### Использованые технологии
 - Entity Framework Core
