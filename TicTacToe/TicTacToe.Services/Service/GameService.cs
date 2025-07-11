@@ -79,10 +79,12 @@ public class GameService : IGameService
         else
             move.PlayerUuid = request.PlayerUuid;
 
+        string[][] board = game.Board;
         if (move.PlayerUuid == game.FirstPlayerUuid)
-            game.Board[move.Row][move.Column] = "X";
+            board[move.Row][move.Column] = "X";
         else
-            game.Board[move.Row][move.Column] = "O";
+            board[move.Row][move.Column] = "O";
+        game.Board = board;
 
         game.Moves.Add(move);
 
@@ -106,7 +108,8 @@ public class GameService : IGameService
             }
         }
 
-        return await _gameRepository.MakeMoveAsync(game, move, token);
+        await _gameRepository.MakeMoveAsync(game, move, token);
+        return game;
     }
 
     private GameResult? CheckForWinner(

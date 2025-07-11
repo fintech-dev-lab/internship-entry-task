@@ -23,7 +23,6 @@ public class Game: IEntityWithUuid
         set => BoardJson = JsonSerializer.Serialize(value);
     }
 
-
     public List<Move> Moves { get; set; }
     
     public User? Winner { get; set; }
