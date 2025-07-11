@@ -8,16 +8,10 @@ namespace TicTacToe.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class GamesController : ControllerBase
+    public class GamesController(IMediator mediator, IIdempotencyCache cache) : ControllerBase
     {
-        private readonly IMediator _mediator;
-        private readonly IIdempotencyCache _cache;
-
-        public GamesController(IMediator mediator, IIdempotencyCache cache)
-        {
-            _mediator = mediator;
-            _cache = cache;
-        }
+        private readonly IMediator _mediator = mediator;
+        private readonly IIdempotencyCache _cache = cache;
 
         [HttpPost]
         public async Task<IActionResult> CreateGame()
@@ -46,8 +40,10 @@ namespace TicTacToe.API.Controllers
 
             var key = idempotencyKey.ToString();
 
+            Response.Headers.ETag = new Microsoft.Extensions.Primitives.StringValues(key);
+
             var cachedResponse = await _cache.GetAsync(key);
-            if (cachedResponse != null)
+            if (cachedResponse is not null)
             {
                 return Ok(cachedResponse);
             }
@@ -59,7 +55,10 @@ namespace TicTacToe.API.Controllers
 
                 var updatedGame = await _mediator.Send(new GetGameByIdQuery(id));
 
-                await _cache.SetAsync(key, updatedGame);
+                if (updatedGame is not null)
+                {
+                    await _cache.SetAsync(key, updatedGame);
+                }
 
                 return Ok(updatedGame);
             }

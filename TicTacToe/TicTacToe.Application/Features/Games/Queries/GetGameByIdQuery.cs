@@ -7,23 +7,16 @@ namespace TicTacToe.Application.Features.Games.Queries
 {
     public record GetGameByIdQuery(Guid Id) : IRequest<GameDto?>;
 
-    public class GetGameByIdQueryHandler : IRequestHandler<GetGameByIdQuery, GameDto?>
+    public class GetGameByIdQueryHandler(IGameRepository gameRepository) : IRequestHandler<GetGameByIdQuery, GameDto?>
     {
-        private readonly IGameRepository _gameRepository;
-
-        public GetGameByIdQueryHandler(IGameRepository gameRepository)
-        {
-            _gameRepository = gameRepository;
-        }
+        private readonly IGameRepository _gameRepository = gameRepository;
 
         public async Task<GameDto?> Handle(GetGameByIdQuery request, CancellationToken cancellationToken)
         {
             var game = await _gameRepository.GetByIdAsync(request.Id, cancellationToken);
 
             if (game is null)
-            {
-                return null;
-            }
+                return null;            
 
             return game.ToDto();
         }

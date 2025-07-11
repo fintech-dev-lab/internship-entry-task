@@ -4,14 +4,9 @@ using TicTacToe.Application.Interfaces;
 
 namespace TicTacToe.Infrastructure.Caching
 {
-    public class InMemoryIdempotencyCache : IIdempotencyCache
+    public class InMemoryIdempotencyCache(IMemoryCache cache) : IIdempotencyCache
     {
-        private readonly IMemoryCache _cache;
-
-        public InMemoryIdempotencyCache(IMemoryCache cache)
-        {
-            _cache = cache;
-        }
+        private readonly IMemoryCache _cache = cache;
 
         public Task<GameDto?> GetAsync(string key)
         {

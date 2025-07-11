@@ -3,18 +3,13 @@ using TicTacToe.Domain.Entities;
 
 namespace TicTacToe.Infrastructure.Persistence
 {
-    public class GameRepository : IGameRepository
+    public class GameRepository(AppDbContext context) : IGameRepository
     {
-        private readonly AppDbContext _context;
-
-        public GameRepository(AppDbContext context)
-        {
-            _context = context;
-        }
+        private readonly AppDbContext _context = context;
 
         public async Task<Game?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            return await _context.Games.FindAsync(new object[] { id }, cancellationToken);
+            return await _context.Games.FindAsync([id], cancellationToken);
         }
 
         public async Task AddAsync(Game game, CancellationToken cancellationToken = default)

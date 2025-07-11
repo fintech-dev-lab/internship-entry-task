@@ -8,16 +8,10 @@ namespace TicTacToe.Application.Features.Games.Commands
 {
     public record CreateGameCommand : IRequest<Guid>;
 
-    public class CreateGameCommandHandler : IRequestHandler<CreateGameCommand, Guid>
+    public class CreateGameCommandHandler(IGameRepository gameRepository, IOptions<GameSettings> gameSettings) : IRequestHandler<CreateGameCommand, Guid>
     {
-        private readonly IGameRepository _gameRepository;
-        private readonly GameSettings _gameSettings;
-
-        public CreateGameCommandHandler(IGameRepository gameRepository, IOptions<GameSettings> gameSettings)
-        {
-            _gameRepository = gameRepository;
-            _gameSettings = gameSettings.Value;
-        }
+        private readonly IGameRepository _gameRepository = gameRepository;
+        private readonly GameSettings _gameSettings = gameSettings.Value;
 
         public async Task<Guid> Handle(CreateGameCommand request, CancellationToken cancellationToken)
         {

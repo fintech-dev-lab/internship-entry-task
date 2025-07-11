@@ -1,17 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Text.Json;
 using TicTacToe.Domain.Entities;
-using TicTacToe.Domain.Enums;
 
 namespace TicTacToe.Infrastructure.Persistence
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
     {
         public DbSet<Game> Games { get; set; }
-
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        {
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

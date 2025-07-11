@@ -11,10 +11,7 @@ namespace TicTacToe.Infrastructure.Services
         {
             get
             {
-                if (_local is null)
-                {
-                    _local = new Random(Environment.CurrentManagedThreadId);
-                }
+                _local ??= new Random(Environment.CurrentManagedThreadId);
                 return _local;
             }
         }
