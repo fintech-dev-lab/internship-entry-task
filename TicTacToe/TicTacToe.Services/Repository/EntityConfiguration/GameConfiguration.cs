@@ -24,12 +24,5 @@ public class GameConfiguration: IEntityTypeConfiguration<Game>
             .WithMany()
             .HasForeignKey(g => g.SecondPlayerUuid)
             .OnDelete(DeleteBehavior.Restrict);
-
-        builder
-            .HasOne(g => g.Winner)
-            .WithMany()
-            .HasForeignKey(g => g.WinnerUuid)
-            .IsRequired(false)
-            .OnDelete(DeleteBehavior.Restrict);
     }
 }

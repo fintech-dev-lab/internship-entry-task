@@ -28,4 +28,6 @@ public class Game: IEntityWithUuid
     
     public User? Winner { get; set; }
     public Guid? WinnerUuid { get; set; }
+    
+    public bool IsDraw { get; set; }
 }

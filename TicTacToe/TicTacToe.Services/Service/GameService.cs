@@ -14,6 +14,8 @@ public class GameService : IGameService
 
     private readonly GameSettings _settings;
 
+    private readonly Random _random = new();
+
     public GameService(
         IGameRepository gameRepository,
         IMoveRepository moveRepository,
@@ -28,17 +30,17 @@ public class GameService : IGameService
         CreateGameRequest request,
         CancellationToken token)
     {
-        string[][] board = new string[_settings.BoardSize][]; 
+        string[][] board = new string[_settings.BoardSize][];
 
         for (int i = 0; i < _settings.BoardSize; i++)
         {
-            board[i] = new string[_settings.BoardSize]; 
+            board[i] = new string[_settings.BoardSize];
             for (int j = 0; j < _settings.BoardSize; j++)
             {
                 board[i][j] = string.Empty;
             }
         }
-        
+
         var game = new Game()
         {
             FirstPlayerUuid = request.FirstPlayerUuid,
@@ -50,10 +52,110 @@ public class GameService : IGameService
         return await _gameRepository.CreateAsync(game, token);
     }
 
-    public Task<Game> MakeMoveAsync(
+    public async Task<Game> MakeMoveAsync(
         MakeMoveRequest request,
         CancellationToken token)
     {
-        throw new NotImplementedException();
+        Game game = await _gameRepository.GetAsync(request.GameUuid, token);
+
+        if (game.Winner is not null)
+            throw new ArgumentException("Game is ended.");
+
+        Move move = new Move
+        {
+            GameUuid = game.Uuid,
+            Row = request.Row,
+            Column = request.Column,
+            Timestamp = DateTime.UtcNow
+        };
+
+        if (game.Moves.Count % 3 == 0 && _random.Next(100) < 10)
+            move.PlayerUuid = request.PlayerUuid == game.FirstPlayerUuid ? game.SecondPlayerUuid : game.FirstPlayerUuid;
+        else
+            move.PlayerUuid = request.PlayerUuid;
+
+        if (move.PlayerUuid == game.FirstPlayerUuid)
+            game.Board[move.Row][move.Column] = "X";
+        else
+            game.Board[move.Row][move.Column] = "O";
+
+        game.Moves.Append(move);
+
+        await _moveRepository.CreateAsync(move, token);
+        return await _gameRepository.UpdateAsync(game, token);
+    }
+
+    private GameResult? CheckForWinner(
+        string[][] board,
+        Guid firstPlayerUuid,
+        Guid secondPlayerUuid,
+        int lastMoveRow,
+        int lastMoveCol)
+    {
+        int boardSize = board.Length;
+        int winLength = _settings.WinLength;
+        string marker = board[lastMoveRow][lastMoveCol];
+        if (string.IsNullOrEmpty(marker))
+            return null;
+
+        Guid? GetWinnerFromMarker(string marker) => marker switch
+        {
+            "X" => firstPlayerUuid,
+            "O" => secondPlayerUuid,
+            _ => null
+        };
+
+        bool CheckLine(
+            int startRow,
+            int startCol,
+            int dRow,
+            int dCol)
+        {
+            int count = 0;
+            for (int i = 0; i < winLength; i++)
+            {
+                int r = startRow + i * dRow;
+                int c = startCol + i * dCol;
+
+                if (r >= 0 && r < boardSize && c >= 0 && c < boardSize && board[r][c] == marker)
+                {
+                    count++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return count == winLength;
+        }
+
+        int[] dRows = { 0, 1, 1, 1 };
+        int[] dCols = { 1, 0, 1, -1 };
+
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < winLength; j++)
+            {
+                if (CheckLine(
+                        lastMoveRow - j * dRows[i],
+                        lastMoveCol - j * dCols[i],
+                        dRows[i],
+                        dCols[i]))
+                {
+                    Guid? winnerUuid = GetWinnerFromMarker(marker);
+                    if (winnerUuid == null)
+                        return null;
+                    return new GameResult.Winner(winnerUuid.Value);
+                }
+            }
+        }
+
+        if (board.SelectMany(row => row).All(cell => !string.IsNullOrEmpty(cell)))
+        {
+            return new GameResult.Draw();
+        }
+
+        return null;
     }
 }
