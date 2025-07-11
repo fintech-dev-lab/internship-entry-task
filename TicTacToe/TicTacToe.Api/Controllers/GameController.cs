@@ -24,6 +24,22 @@ public class GameController : ControllerBase
         _gameService = gameService;
     }
 
+    [HttpGet("/{uuid}")]
+    public async Task<IActionResult> GetGameAsync(Guid uuid, CancellationToken token)
+    {
+        try
+        {
+            Game game = await _gameService.GetGameAsync(uuid, token);
+            GameResponse gameResponse = _mapper.Map<GameResponse>(game);
+            return Ok(gameResponse);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, e.Message);
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
     [HttpPost]
     public async Task<IActionResult> CreateGame(
         [FromBody] CreateGameRequest request,

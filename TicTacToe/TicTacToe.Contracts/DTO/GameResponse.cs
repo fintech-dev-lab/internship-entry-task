@@ -12,4 +12,6 @@ public class GameResponse
     public List<MoveDto> Moves { get; set; }
 
     public Guid? WinnerUuid { get; set; }
+
+    public bool IsDraw { get; set; }
 }

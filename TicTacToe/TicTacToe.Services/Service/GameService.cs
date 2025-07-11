@@ -26,6 +26,11 @@ public class GameService : IGameService
         _settings = settings.Value;
     }
 
+    public async Task<Game> GetGameAsync(Guid uuid, CancellationToken token)
+    {
+        return await _gameRepository.GetAsync(uuid, token);
+    }
+
     public async Task<Game> CreateGameAsync(
         CreateGameRequest request,
         CancellationToken token)

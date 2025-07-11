@@ -6,6 +6,10 @@ namespace TicTacToe.Services.Service.Interfaces;
 
 public interface IGameService
 {
+    Task<Game> GetGameAsync(
+        Guid uuid,
+        CancellationToken token);
+    
     Task<Game> CreateGameAsync(
         CreateGameRequest request,
         CancellationToken token);
