@@ -4,16 +4,16 @@ using TicTacToe.Core.Interfaces;
 
 namespace TicTacToe.Core.Entities;
 
-public class Game: IEntityWithUuid
+public class Game : IEntityWithUuid
 {
     public Guid Uuid { get; set; }
 
     public Guid FirstPlayerUuid { get; set; }
     public User FirstPlayer { get; set; }
-    
+
     public Guid SecondPlayerUuid { get; set; }
     public User SecondPlayer { get; set; }
-    
+
     public string BoardJson { get; set; }
 
     [NotMapped]
@@ -23,10 +23,10 @@ public class Game: IEntityWithUuid
         set => BoardJson = JsonSerializer.Serialize(value);
     }
 
-    public List<Move> Moves { get; set; }
-    
+    public List<Move> Moves { get; set; } = new();
+
     public User? Winner { get; set; }
     public Guid? WinnerUuid { get; set; }
-    
+
     public bool IsDraw { get; set; }
 }
