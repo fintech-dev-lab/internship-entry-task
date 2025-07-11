@@ -1,0 +1,31 @@
+version: "3.9"
+networks:
+    services-network:    
+        driver: bridge
+services:
+    postgres-db:
+        container_name: postgres
+        image: postgres:latest
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: 1234
+            POSTGRES_DB: TicTacToeDB
+        ports:
+           - 5432:5432
+        networks:
+            - services-network
+        volumes:
+            - postgres-data:/var/lib/postgressql/data
+    tictactoe:
+        container_name: tictactoe
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "8080:8080"
+        networks:
+            - services-network
+        depends_on:
+           - postgres-db
+volumes:
+    postgres-data:
