@@ -63,7 +63,7 @@ public class GameService : IGameService
     {
         Game game = await _gameRepository.GetAsync(request.GameUuid, token);
 
-        if (game.Winner is not null)
+        if (game.Winner is not null || game.IsDraw)
             throw new ArgumentException("Game is ended.");
 
         Move move = new Move
@@ -74,7 +74,7 @@ public class GameService : IGameService
             Timestamp = DateTime.UtcNow
         };
 
-        if (game.Moves.Count % 3 == 0 && _random.Next(100) < 10)
+        if ((game.Moves.Count + 1) % 3 == 0 && _random.Next(100) < 10)
             move.PlayerUuid = request.PlayerUuid == game.FirstPlayerUuid ? game.SecondPlayerUuid : game.FirstPlayerUuid;
         else
             move.PlayerUuid = request.PlayerUuid;
@@ -84,7 +84,27 @@ public class GameService : IGameService
         else
             game.Board[move.Row][move.Column] = "O";
 
-        game.Moves.Append(move);
+        game.Moves.Add(move);
+
+        GameResult? gameResult = CheckForWinner(
+            game.Board,
+            game.FirstPlayerUuid,
+            game.SecondPlayerUuid,
+            move.Row,
+            move.Column);
+
+        if (gameResult is not null)
+        {
+            switch (gameResult)
+            {
+                case GameResult.Winner winnerResult:
+                    game.WinnerUuid = winnerResult.PlayerUuid;
+                    break;
+                case GameResult.Draw:
+                    game.IsDraw = true;
+                    break;
+            }
+        }
 
         await _moveRepository.CreateAsync(move, token);
         return await _gameRepository.UpdateAsync(game, token);
