@@ -33,12 +33,14 @@ namespace TicTacToe.Application.Features.Games.Queries
     {
         public static GameDto ToDto(this Game game)
         {
+            var board = game.GetBoardState();
             var boardDto = new string?[game.BoardSize, game.BoardSize];
+
             for (int i = 0; i < game.BoardSize; i++)
             {
                 for (int j = 0; j < game.BoardSize; j++)
                 {
-                    boardDto[i, j] = game.Board[i, j]?.ToString();
+                    boardDto[i, j] = board[i, j]?.ToString();
                 }
             }
 

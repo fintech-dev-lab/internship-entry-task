@@ -19,11 +19,7 @@ namespace TicTacToe.Infrastructure.Persistence
             {
                 builder.HasKey(g => g.Id);
 
-                builder.Property(g => g.Board)
-                    .HasConversion(
-                        v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),
-                        v => JsonSerializer.Deserialize<Player?[,]>(v, (JsonSerializerOptions?)null)
-                    );
+                builder.Property(g => g.BoardAsJson).HasColumnType("jsonb");
             });
 
             base.OnModelCreating(modelBuilder);
