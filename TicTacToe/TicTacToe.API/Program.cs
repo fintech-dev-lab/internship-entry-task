@@ -1,9 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using TicTacToe.Application.Configuration;
+using TicTacToe.Application.Features.Games.Commands;
 using TicTacToe.Application.Interfaces;
+using TicTacToe.Infrastructure.Caching;
 using TicTacToe.Infrastructure.Persistence;
 using TicTacToe.Infrastructure.Services;
-using TicTacToe.Application.Features.Games.Commands;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddSingleton<IRandomProvider, SystemRandomProvider>();
+
+builder.Services.AddMemoryCache();
+builder.Services.AddSingleton<IIdempotencyCache, InMemoryIdempotencyCache>();
 
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(CreateGameCommand).Assembly));

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TicTacToe.Application.Features.Games.Commands;
 using TicTacToe.Application.Features.Games.Queries;
+using TicTacToe.Application.Interfaces;
 
 namespace TicTacToe.API.Controllers
 {
@@ -10,10 +11,12 @@ namespace TicTacToe.API.Controllers
     public class GamesController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IIdempotencyCache _cache;
 
-        public GamesController(IMediator mediator)
+        public GamesController(IMediator mediator, IIdempotencyCache cache)
         {
             _mediator = mediator;
+            _cache = cache;
         }
 
         [HttpPost]
@@ -36,10 +39,28 @@ namespace TicTacToe.API.Controllers
         [HttpPost("{id:guid}/moves")]
         public async Task<IActionResult> MakeMove(Guid id, [FromBody] MakeMoveRequest request)
         {
+            if (!Request.Headers.TryGetValue("Idempotency-Key", out var idempotencyKey))
+            {
+                return BadRequest(new ProblemDetails { Title = "Idempotency-Key header is missing." });
+            }
+
+            var key = idempotencyKey.ToString();
+
+            var cachedResponse = await _cache.GetAsync(key);
+            if (cachedResponse != null)
+            {
+                return Ok(cachedResponse);
+            }
+
             try
             {
-                await _mediator.Send(new MakeMoveCommand(id, Enum.Parse<Domain.Enums.Player>(request.Player), request.Row, request.Column));
+                var command = new MakeMoveCommand(id, Enum.Parse<Domain.Enums.Player>(request.Player), request.Row, request.Column);
+                await _mediator.Send(command);
+
                 var updatedGame = await _mediator.Send(new GetGameByIdQuery(id));
+
+                await _cache.SetAsync(key, updatedGame);
+
                 return Ok(updatedGame);
             }
             catch (InvalidOperationException ex)
