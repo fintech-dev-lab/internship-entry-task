@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: mssql
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "q7_E+3OjIi"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - mssql_data:/var/opt/mssql
+
+  api:
+    build:
+      context: .
+      dockerfile: TicTacToe.Api/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=mssql;Database=TicTacToe;User Id=sa;Password=q7_E+3OjIi;"
+      ASPNETCORE_ENVIRONMENT: "Production"
+    depends_on:
+      - mssql
+  
+volumes:
+  mssql_data:
