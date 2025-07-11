@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TicTacToe.Contracts.AutoMapper;
 using TicTacToe.Core.Entities;
@@ -33,6 +34,26 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseExceptionHandler(appError =>
+{
+    appError.Run(async context =>
+    {
+        context.Response.StatusCode = StatusCodes.Status400BadRequest;
+        context.Response.ContentType = "application/problem+json";
+
+        var error = new ProblemDetails
+        {
+            Status = 400,
+            Title = "Invalid request",
+            Detail = "The request was malformed or contained invalid data.",
+            Instance = context.Request.Path
+        };
+
+        await context.Response.WriteAsJsonAsync(error);
+    });
+});
+
 
 // app.UseHttpsRedirection();
 app.MapControllers();

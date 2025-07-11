@@ -63,8 +63,13 @@ public class GameService : IGameService
     {
         Game game = await _gameRepository.GetAsync(request.GameUuid, token);
 
-        if (game.Winner is not null || game.IsDraw)
+        if (game.WinnerUuid is not null || game.IsDraw)
             throw new ArgumentException("Game is ended.");
+
+        var existingMove = await _moveRepository.GetAsync(request.MoveUuid, token);
+
+        if (existingMove != null)
+            return game;
 
         Move move = new Move
         {

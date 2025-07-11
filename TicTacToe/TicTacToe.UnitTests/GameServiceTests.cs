@@ -92,6 +92,57 @@ public class GameServiceTests
     }
 
     [Fact]
+    public async Task MakeMoveAsync_ReturnsGameWithoutChanges_WhenMoveAlreadyExists()
+    {
+        // Arrange
+        var gameId = Guid.NewGuid();
+        var moveId = Guid.NewGuid();
+        var player1 = Guid.NewGuid();
+        var board = new[]
+        {
+            new[] { "X", "", "" },
+            new[] { "", "", "" },
+            new[] { "", "", "" },
+        };
+
+        var existingGame = new Game
+        {
+            Uuid = gameId,
+            FirstPlayerUuid = player1,
+            Board = board,
+            Moves = new List<Move>()
+        };
+
+        var existingMove = new Move { Uuid = moveId };
+
+        var moveRequest = new MakeMoveRequest
+        {
+            GameUuid = gameId,
+            MoveUuid = moveId,
+            PlayerUuid = player1,
+            Row = 1,
+            Column = 1
+        };
+
+        _gameRepositoryMock.Setup(r => r.GetAsync(gameId, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(existingGame);
+
+        _moveRepositoryMock.Setup(r => r.GetAsync(moveId, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(existingMove);
+
+        // Act
+        var result = await _service.MakeMoveAsync(moveRequest, CancellationToken.None);
+
+        // Assert
+        var occupiedCells = result.Board
+            .SelectMany(row => row)
+            .Count(cell => !string.IsNullOrEmpty(cell));
+        
+        Assert.Equal(1, occupiedCells);
+        Assert.Empty(result.Moves);
+    }
+
+    [Fact]
     public async Task MakeMoveAsync_RegistersDraw()
     {
         // Arrange

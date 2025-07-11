@@ -24,7 +24,7 @@ public class GameController : ControllerBase
         _gameService = gameService;
     }
 
-    [HttpGet("/{uuid}")]
+    [HttpGet("{uuid}")]
     public async Task<IActionResult> GetGameAsync(Guid uuid, CancellationToken token)
     {
         try
@@ -58,7 +58,7 @@ public class GameController : ControllerBase
         }
     }
 
-    [HttpPost("move")]
+    [HttpPost("MakeMove")]
     public async Task<IActionResult> MakeMove(
         [FromBody] MakeMoveRequest request,
         CancellationToken token)

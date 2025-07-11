@@ -7,5 +7,7 @@
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::40A5F412-C163-4227-8FF9-F35E23F8ABD4::net9.0::TicTacToe.IntegrationTests.BaseRepositoryTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::40A5F412-C163-4227-8FF9-F35E23F8ABD4::net9.0::TicTacToe.IntegrationTests.GameRepositoryTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::190EEEB0-5260-4146-B923-4EDADB47D290::net9.0::TicTacToe.UnitTests.GameServiceTests.MakeMoveAsync_RegistersDraw&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::190EEEB0-5260-4146-B923-4EDADB47D290::net9.0::TicTacToe.UnitTests.GameServiceTests.MakeMoveAsync_ReturnsGameWithoutChanges_WhenMoveAlreadyExists&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
