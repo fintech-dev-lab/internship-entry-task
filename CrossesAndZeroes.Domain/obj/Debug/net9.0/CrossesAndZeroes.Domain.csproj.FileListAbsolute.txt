@@ -1,0 +1,11 @@
+D:\Learn_C#\CrossesAndZeroes.Domain\bin\Debug\net9.0\CrossesAndZeroes.Domain.deps.json
+D:\Learn_C#\CrossesAndZeroes.Domain\bin\Debug\net9.0\CrossesAndZeroes.Domain.dll
+D:\Learn_C#\CrossesAndZeroes.Domain\bin\Debug\net9.0\CrossesAndZeroes.Domain.pdb
+D:\Learn_C#\CrossesAndZeroes.Domain\obj\Debug\net9.0\CrossesAndZeroes.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Learn_C#\CrossesAndZeroes.Domain\obj\Debug\net9.0\CrossesAndZeroes.Domain.AssemblyInfoInputs.cache
+D:\Learn_C#\CrossesAndZeroes.Domain\obj\Debug\net9.0\CrossesAndZeroes.Domain.AssemblyInfo.cs
+D:\Learn_C#\CrossesAndZeroes.Domain\obj\Debug\net9.0\CrossesAndZeroes.Domain.csproj.CoreCompileInputs.cache
+D:\Learn_C#\CrossesAndZeroes.Domain\obj\Debug\net9.0\CrossesAndZeroes.Domain.dll
+D:\Learn_C#\CrossesAndZeroes.Domain\obj\Debug\net9.0\refint\CrossesAndZeroes.Domain.dll
+D:\Learn_C#\CrossesAndZeroes.Domain\obj\Debug\net9.0\CrossesAndZeroes.Domain.pdb
+D:\Learn_C#\CrossesAndZeroes.Domain\obj\Debug\net9.0\ref\CrossesAndZeroes.Domain.dll

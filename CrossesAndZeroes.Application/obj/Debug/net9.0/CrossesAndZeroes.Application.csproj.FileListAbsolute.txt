@@ -1,0 +1,15 @@
+D:\Learn_C#\CrossesAndZeroes.Application\bin\Debug\net9.0\CrossesAndZeroes.Application.deps.json
+D:\Learn_C#\CrossesAndZeroes.Application\bin\Debug\net9.0\CrossesAndZeroes.Application.dll
+D:\Learn_C#\CrossesAndZeroes.Application\bin\Debug\net9.0\CrossesAndZeroes.Application.pdb
+D:\Learn_C#\CrossesAndZeroes.Application\bin\Debug\net9.0\CrossesAndZeroes.Domain.dll
+D:\Learn_C#\CrossesAndZeroes.Application\bin\Debug\net9.0\CrossesAndZeroes.Domain.pdb
+D:\Learn_C#\CrossesAndZeroes.Application\obj\Debug\net9.0\CrossesAndZeroes.Application.csproj.AssemblyReference.cache
+D:\Learn_C#\CrossesAndZeroes.Application\obj\Debug\net9.0\CrossesAndZeroes.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Learn_C#\CrossesAndZeroes.Application\obj\Debug\net9.0\CrossesAndZeroes.Application.AssemblyInfoInputs.cache
+D:\Learn_C#\CrossesAndZeroes.Application\obj\Debug\net9.0\CrossesAndZeroes.Application.AssemblyInfo.cs
+D:\Learn_C#\CrossesAndZeroes.Application\obj\Debug\net9.0\CrossesAndZeroes.Application.csproj.CoreCompileInputs.cache
+D:\Learn_C#\CrossesAndZeroes.Application\obj\Debug\net9.0\CrossesA.8188528B.Up2Date
+D:\Learn_C#\CrossesAndZeroes.Application\obj\Debug\net9.0\CrossesAndZeroes.Application.dll
+D:\Learn_C#\CrossesAndZeroes.Application\obj\Debug\net9.0\refint\CrossesAndZeroes.Application.dll
+D:\Learn_C#\CrossesAndZeroes.Application\obj\Debug\net9.0\CrossesAndZeroes.Application.pdb
+D:\Learn_C#\CrossesAndZeroes.Application\obj\Debug\net9.0\ref\CrossesAndZeroes.Application.dll
