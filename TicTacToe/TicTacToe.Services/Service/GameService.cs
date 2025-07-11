@@ -79,12 +79,14 @@ public class GameService : IGameService
         else
             move.PlayerUuid = request.PlayerUuid;
 
-        string[][] board = game.Board;
+        string[][] changedBoard = game.Board;
+        
         if (move.PlayerUuid == game.FirstPlayerUuid)
-            board[move.Row][move.Column] = "X";
+            changedBoard[move.Row][move.Column] = "X";
         else
-            board[move.Row][move.Column] = "O";
-        game.Board = board;
+            changedBoard[move.Row][move.Column] = "O";
+        
+        game.Board = changedBoard;
 
         game.Moves.Add(move);
 

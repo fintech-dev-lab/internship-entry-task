@@ -3,8 +3,9 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AMemoryMarshal_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003FLibrary_003FApplication_0020Support_003FJetBrains_003FRider2025_002E1_003Fresharper_002Dhost_003FDecompilerCache_003Fdecompiler_003F1b4d58039305476fac8d2a391a3edde5f83200_003Fe1_003Fddf7b4e5_003FMemoryMarshal_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AMock_00601_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003FLibrary_003FApplication_0020Support_003FJetBrains_003FRider2025_002E1_003Fresharper_002Dhost_003FSourcesCache_003F337268366a89be4dda7d47b37063fd21841972237539397997c82c4f924b_003FMock_00601_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AServiceCollectionExtensions_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003FLibrary_003FApplication_0020Support_003FJetBrains_003FRider2025_002E1_003Fresharper_002Dhost_003FDecompilerCache_003Fdecompiler_003F017cb25f4df0427a85b1809e327451b246c00_003Fdb_003Fe2602ee7_003FServiceCollectionExtensions_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=326d4871_002Dec09_002D4a78_002D88c6_002D1a7b78892e91/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GameServiceTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::190EEEB0-5260-4146-B923-4EDADB47D290::net9.0::TicTacToe.UnitTests.GameServiceTests&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=326d4871_002Dec09_002D4a78_002D88c6_002D1a7b78892e91/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GameServiceTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::40A5F412-C163-4227-8FF9-F35E23F8ABD4::net9.0::TicTacToe.IntegrationTests.BaseRepositoryTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::40A5F412-C163-4227-8FF9-F35E23F8ABD4::net9.0::TicTacToe.IntegrationTests.GameRepositoryTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
