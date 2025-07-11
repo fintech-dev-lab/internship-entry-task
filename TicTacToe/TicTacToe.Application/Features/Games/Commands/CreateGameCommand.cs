@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Options;
+using TicTacToe.Application.Configuration;
 using TicTacToe.Application.Interfaces;
 using TicTacToe.Domain.Entities;
 
@@ -9,18 +11,17 @@ namespace TicTacToe.Application.Features.Games.Commands
     public class CreateGameCommandHandler : IRequestHandler<CreateGameCommand, Guid>
     {
         private readonly IGameRepository _gameRepository;
+        private readonly GameSettings _gameSettings;
 
-        public CreateGameCommandHandler(IGameRepository gameRepository)
+        public CreateGameCommandHandler(IGameRepository gameRepository, IOptions<GameSettings> gameSettings)
         {
-            gameRepository = _gameRepository;
+            _gameRepository = gameRepository;
+            _gameSettings = gameSettings.Value;
         }
 
         public async Task<Guid> Handle(CreateGameCommand request, CancellationToken cancellationToken)
         {
-            const int boardSize = 3;
-            const int winCondition = 3;
-
-            var game = new Game(Guid.NewGuid(), boardSize, winCondition);
+            var game = new Game(Guid.NewGuid(), _gameSettings.BoardSize, _gameSettings.WinCondition);
 
             await _gameRepository.AddAsync(game, cancellationToken);
 
