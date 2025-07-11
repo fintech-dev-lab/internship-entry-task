@@ -106,8 +106,7 @@ public class GameService : IGameService
             }
         }
 
-        await _moveRepository.CreateAsync(move, token);
-        return await _gameRepository.UpdateAsync(game, token);
+        return await _gameRepository.MakeMoveAsync(game, move, token);
     }
 
     private GameResult? CheckForWinner(
