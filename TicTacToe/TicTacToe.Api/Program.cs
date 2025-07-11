@@ -54,6 +54,7 @@ app.UseExceptionHandler(appError =>
     });
 });
 
+app.MapGet("/health", () => Results.Ok());
 
 // app.UseHttpsRedirection();
 app.MapControllers();
