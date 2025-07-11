@@ -9,7 +9,6 @@ using TicTacToe.Services.Service;
 
 namespace TicTacToe.UnitTests;
 
-// TODO: What to do then 10% chance hits
 public class GameServiceTests
 {
     private readonly Mock<IGameRepository> _gameRepositoryMock = new();
