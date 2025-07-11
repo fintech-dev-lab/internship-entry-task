@@ -1,0 +1,79 @@
+[
+  {
+    "ContainingType": "CrossesAndZeroes.Controllers.GameController",
+    "Method": "CreateGame",
+    "RelativePath": "api/games",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "CrossesAndZeroes.Domain.Entities.Game",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CrossesAndZeroes.Controllers.GameController",
+    "Method": "GetGame",
+    "RelativePath": "api/games/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "CrossesAndZeroes.Domain.Entities.Game",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CrossesAndZeroes.Controllers.GameController",
+    "Method": "MakeMove",
+    "RelativePath": "api/games/{id}/moves",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "move",
+        "Type": "CrossesAndZeroes.Application.DTOs.MoveDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "CrossesAndZeroes.Domain.Entities.Game",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

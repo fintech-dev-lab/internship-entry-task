@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: game-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 13130216
+      POSTGRES_DB: GameDb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - game-network
+
+  crossesandzeroes:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: game-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=GameDb;Username=postgres;Password=13130216
+    networks:
+      - game-network
+
+volumes:
+  pgdata:
+
+networks:
+  game-network:
