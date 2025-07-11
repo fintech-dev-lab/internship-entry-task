@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TicTacToe.Contracts.AutoMapper;
 using TicTacToe.Core.Entities;
+using TicTacToe.Core.Interfaces;
 using TicTacToe.Services.Repository;
 using TicTacToe.Services.Repository.Interfaces;
 using TicTacToe.Services.Service;
@@ -20,6 +21,7 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddScoped<IGameService, GameService>();
+builder.Services.AddScoped<IRandomProvider, DefaultRandomProvider>();
 
 builder.Services.AddScoped<IMoveRepository, MoveRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();

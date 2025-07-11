@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Options;
 using TicTacToe.Contracts.DTO;
 using TicTacToe.Core.Entities;
+using TicTacToe.Core.Interfaces;
 using TicTacToe.Services.Repository.Interfaces;
 using TicTacToe.Services.Service.Interfaces;
 
@@ -14,16 +15,18 @@ public class GameService : IGameService
 
     private readonly GameSettings _settings;
 
-    private readonly Random _random = new();
+    private readonly IRandomProvider _random;
 
     public GameService(
         IGameRepository gameRepository,
         IMoveRepository moveRepository,
-        IOptions<GameSettings> settings)
+        IOptions<GameSettings> settings,
+        IRandomProvider random)
     {
         _gameRepository = gameRepository;
         _moveRepository = moveRepository;
         _settings = settings.Value;
+        _random = random;
     }
 
     public async Task<Game> GetGameAsync(Guid uuid, CancellationToken token)

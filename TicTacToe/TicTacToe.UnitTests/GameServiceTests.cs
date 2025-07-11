@@ -2,6 +2,8 @@ using Microsoft.Extensions.Options;
 using Moq;
 using TicTacToe.Contracts.DTO;
 using TicTacToe.Core.Entities;
+using TicTacToe.Core.Interfaces;
+using TicTacToe.Services.Repository;
 using TicTacToe.Services.Repository.Interfaces;
 using TicTacToe.Services.Service;
 
@@ -17,10 +19,14 @@ public class GameServiceTests
 
     public GameServiceTests()
     {
+        var mockRandom = new Mock<IRandomProvider>();
+        mockRandom.Setup(r => r.Next(It.IsAny<int>())).Returns(42);
+
         _service = new GameService(
             _gameRepositoryMock.Object,
             _moveRepositoryMock.Object,
-            Options.Create(_settings));
+            Options.Create(_settings),
+            mockRandom.Object);
     }
 
     [Fact]
